@@ -1,0 +1,43 @@
+body {
+    font-family: Arial, sans-serif; /* match body */
+    font-size: 11pt;
+}
+
+a {
+    color: royalblue;
+    text-decoration: underline;
+}
+
+article h2 a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.button-link {
+    background-color: transparent;
+    border: none;
+    color: royalblue; /* match links */
+    cursor: pointer;
+    font-family: Arial, sans-serif; /* match body */
+    font-size: 11pt;
+    padding: 0;
+    text-decoration: underline; /* match links */
+}
+
+.CodeMirror {
+    border: 1px solid lightslategray;
+    height: auto;
+    margin: 1em 0;
+}
+
+nav ul li {
+    display: inline;
+}
+
+#headline {
+    font-size: larger;
+}
+
+footer {
+    font-size: 75%;
+}

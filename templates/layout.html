@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <title>{{ title }}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
+    </head>
+    <body>
+        <header>
+            <h1>Stephen Booher</h2>
+        </header>
+        <nav>
+            <ul>
+                {% if session.user_id %}
+                <li>
+                    You are signed in as {{ session.username }}. 
+                    <form method="post" action="/newsroom/sign-out">
+                        <input type="hidden" name="action-token" value="TODO">
+                        <button type="submit" class="button-link">Sign Out</button>
+                    </form>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        <hr>
+        <main>
+        {% block body %}{% endblock %}
+        </main>
+        <hr>
+        <footer><p>Using the I-haven't-finished-styling-yet theme.</p></footer>
+    </body>
+</html>
