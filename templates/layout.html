@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html dir="ltr" lang="en-US" {% block htmlattr %}{% endblock %}>
     <head>
-        <title>{{ title }}</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
+        <title>{% block title %}{% endblock %}</title>
+        {% block head %}{% endblock %}
+        <link rel="stylesheet" href="{{ url_for("static", filename="stylesheet.css") }}">
     </head>
     <body>
         <header>
@@ -13,7 +14,7 @@
                 {% if session.user_id %}
                 <li>
                     You are signed in as {{ session.username }}. 
-                    <form method="post" action="/newsroom/sign-out">
+                    <form method="post" action="{{ url_for("auth_sign_out") }}">
                         <input type="hidden" name="action-token" value="TODO">
                         <button type="submit" class="button-link">Sign Out</button>
                     </form>

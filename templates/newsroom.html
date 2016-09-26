@@ -2,8 +2,8 @@
 {% block body %}
     <h2>Newsroom</h2>
     <p>Write an article</p>
-    <link rel="stylesheet" href="{{ url_for('static', filename='lib/codemirror-5.18.2.css') }}"></script>
-    <form action="/" method="post">
+    <link rel="stylesheet" href="{{ url_for("static", filename="lib/codemirror-5.18.2.css") }}"></script>
+    <form action="{{ url_for("article_bulk") }}" method="post">
         <input type="text" id="headline" name="headline" placeholder="Headline" required>
         <textarea id="article" name="article"></textarea>
         <p>Enter a URL for your entry</p>
@@ -13,9 +13,9 @@
         <input type="button" value="Cancel">
         <input type="submit" value="Publish">
     </form>
-    <script src="{{ url_for('static', filename='newsroom.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/codemirror-5.18.2-combined.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/codemirror-5.18.2-mode-meta.js') }}"></script>
+    <script src="{{ url_for("static", filename="newsroom.js") }}"></script>
+    <script src="{{ url_for("static", filename="lib/codemirror-5.18.2-combined.min.js") }}"></script>
+    <script src="{{ url_for("static", filename="lib/codemirror-5.18.2-mode-meta.js") }}"></script>
     <script>
         var editor = CodeMirror.fromTextArea(document.getElementById('article'), {
             lineNumbers: false,

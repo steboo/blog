@@ -13,6 +13,11 @@ article h2 a {
     text-decoration: inherit;
 }
 
+p.meta {
+    color: dimgray;
+    font-size: 85%;
+}
+
 .button-link {
     background-color: transparent;
     border: none;
@@ -39,5 +44,6 @@ nav ul li {
 }
 
 footer {
+    color: gray;
     font-size: 75%;
 }

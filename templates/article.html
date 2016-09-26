@@ -1,5 +1,20 @@
 {% extends "layout.html" %}
 {% from "macros.html" import article with context %}
+{% block htmlattr %}prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#"{% endblock %}
+{% block title %}{{ row.headline }}{% endblock %}
+{% block head %}
+    <meta property="og:title" content="{{ row.headline }}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="TODO + {{ url_for("article_resource", slug=row.slug) }}">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="{{ row.published_date }}">
+    <meta property="article:modified_time" content="{{ row.modified_date }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@stephenbooher">
+    <meta name="twitter:title" content="{{ row.headline }}">
+    <meta name="twitter:description" content="{{ row.description }}">
+    <meta name="twitter:creator" content="@stephenbooher">
+{% endblock %}
 {% block body %}
     {{ article(row, False) }}
 {% endblock %}

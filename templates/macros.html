@@ -1,23 +1,29 @@
-{% macro article(row, is_single=True) %}
-{% if not is_single %}
-<nav>
-    <p><a href="{{ url_for('article_bulk') }}">Main Page</a></p>
-</nav>
-{% endif %}
-<article>
+{% macro article(row, is_summary=True) %}
+{% if is_summary %}
+<article resource="{{ url_for("article_resource", slug=row.slug) }}">
     <header>
-        <h2>
-            {% if is_single %}
-            <a href="/{{ row.slug }}">{{ row.headline }}</a></h2>
-            {% else %}
-            {{ row.headline }}
-            {% endif %}
+        <h2 property="title">
+            <a href="{{ url_for("article_resource", slug=row.slug) }}">{{ row.headline }}</a></h2>
         </h2>
+        <p>{# By <span property="creator">{{ row.author }}</span> #} <time property="created" datetime="{{ row.published_date }}" >{{ row.published_date }}</time></p>
     </header>
-    <time>Published {{ row.published_date }}</time>
-    <p>{{ row.article }}</p>
-    <footer><!-- Copyright &copy; {{ row.copyright_years }} Stephen Booher.--></footer>
+    <section>
+        {{ row.article|safe }}
+    </section>
+    <footer><!-- Technically, every post has a separate copyright. But repeating it looks silly and overprotective. Copyright &copy; {{ row.copyright_years }} Stephen Booher.--></footer>
 </article>
+{% else %}
+<article class="h-entry hentry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        <h2 class="p-name entry-title" itemprop="name headline">{{ row.headline }}</h2>
+        {# <p>By <span class="p-author h-card author vcard" itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="fn" itemprop="name">{{ row.author }}</span></span> #} <time class="dt-published published" datetime="{{ row.published_date }}" itemprop="datePublished" content="{{ row.published_date }}">{{ row.published_date }}</time></p>
+    </header>
+    <section class="e-content entry-content" itemprop="articleBody">
+        {{ row.article|safe }}
+    </section>
+    <footer><!-- Copyright &copy; <span itemprop="copyrightYear">{{ row.copyright_years }}</span> <span itemprop="copyrightHolder">Stephen Booher</span>.--></footer>
+</article>
+{% endif %}
 {% endmacro %}
 
 {% macro articles(rows) %}
