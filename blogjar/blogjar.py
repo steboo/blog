@@ -4,7 +4,7 @@ import os
 from datetime import datetime
 from urllib.parse import urlparse, urlunparse
 from flask import Blueprint, Flask, render_template, redirect, request, session, url_for
-from models import Models
+from blogjar.models import Models
 
 app = Flask(__name__)
 os.environ['BLOG_SETTINGS'] = './settings.cfg'

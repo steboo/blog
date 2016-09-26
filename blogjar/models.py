@@ -1,15 +1,18 @@
+import os
 import sqlite3
 import markdown2
 
 class Models(object):
     def __init__(self, app):
         self.app = app
+        self.db_path = os.path.join(
+            os.path.dirname(__file__), app.config['DATABASE_URI'])
 
     def _dict_from_row(self, row):
         return dict(zip(row.keys(), row))
 
     def init_db(self):
-        conn = sqlite3.connect(self.app.config['DATABASE_URI'])
+        conn = sqlite3.connect(self.db_path)
 
         #with conn:
         #c = conn.cursor()
@@ -20,7 +23,7 @@ class Models(object):
         conn.close()
 
     def auth(self, username, password):
-        conn = sqlite3.connect(self.app.config['DATABASE_URI'])
+        conn = sqlite3.connect(self.db_path)
         with conn:
             conn.row_factory = sqlite3.Row
             c = conn.cursor()
@@ -31,7 +34,7 @@ class Models(object):
         return row
 
     def get_articles(self):
-        conn = sqlite3.connect(self.app.config['DATABASE_URI'])
+        conn = sqlite3.connect(self.db_path)
         with conn:
             conn.row_factory = sqlite3.Row
             c = conn.cursor()
@@ -54,7 +57,7 @@ class Models(object):
         return articles
 
     def get_article(self, slug):
-        conn = sqlite3.connect(self.app.config['DATABASE_URI'])
+        conn = sqlite3.connect(self.db_path)
         with conn:
             conn.row_factory = sqlite3.Row
             c = conn.cursor()
@@ -72,7 +75,7 @@ class Models(object):
         return article
 
     def create_article(self, headline, article, slug, is_minor, user_id):
-        conn = sqlite3.connect(self.app.config['DATABASE_URI'])
+        conn = sqlite3.connect(self.db_path)
         with conn:
             conn.row_factory = sqlite3.Row
             c = conn.cursor()
